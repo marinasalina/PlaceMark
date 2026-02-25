@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "_id": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret",
+      "_id": "5e97c6ba-cfad-41b0-98a4-61721e8f8466"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret",
+      "_id": "92e94e0a-6408-4976-a783-b452546f6bab"
+    }
+  ],
+
+  "placemarks": [
+    {
+      "name": "The Spire of Dublin",
+      "description": "A 120-metre stainless steel monument located on O'Connell Street in Dublin.",
+      "category": "Monument",
+      "location": "Dublin, Ireland",
+      "latitude": "53.349809",
+      "longitude": "-6.260310",
+
+      "_id": "7aa1c909-c9a6-4af5-a223-57d928384fc0",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    }
+  ]
+}
