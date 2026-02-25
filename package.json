@@ -15,5 +15,12 @@
   "main": "index.js",
   "scripts": {
     "test": "\"npx mocha --ui tdd test/**/*.js -exit\",  "
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin": "^1.0.1",
+    "import": "^0.0.6",
+    "prettier": "^3.8.1"
   }
 }
