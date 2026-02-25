@@ -1,0 +1,19 @@
+{
+  "name": "placemark",
+  "version": "1.0.0",
+  "description": "Assignment 1, PlaceMark is a web-based application designed to create, manage, and explore Points of Interest (POIs).   ",
+  "keywords": [
+    "poi"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "PlaceMark"
+  },
+  "license": "ISC",
+  "author": "Marina Salina",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"npx mocha --ui tdd test/**/*.js -exit\",  "
+  }
+}
