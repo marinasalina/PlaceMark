@@ -22,12 +22,11 @@ export const UserCredentialsSpec = {
   password: Joi.string().required(),
 };
 
-export const TrackSpec = {
-  title: Joi.string().required(),
-  artist: Joi.string().required(),
-  duration: Joi.number().allow("").optional(),
-};
-
-export const PlacemarkSpec = {
-  title: Joi.string().required(),
-};
+export const PlacemarkSpec = Joi.object({
+  name: Joi.string().required(),
+  description: Joi.string().required(),
+  category: Joi.string().required(),
+  location: Joi.string().required(),
+  latitude: Joi.string().required(),
+  longitude: Joi.string().required(),
+});
