@@ -9,17 +9,29 @@ export const webRoutes = [
   { method: "GET", path: "/logout", config: accountsController.logout },
   { method: "POST", path: "/register", config: accountsController.signup },
   { method: "POST", path: "/authenticate", config: accountsController.login },
-
+  { method: "GET", path: "/about", config: aboutController.index },
   { method: "GET", path: "/dashboard", config: dashboardController.index },
+
   {
     method: "POST",
     path: "/dashboard/addplacemark",
     config: dashboardController.addPlacemark,
   },
-  { method: "GET", path: "/about", config: aboutController.index },
   {
     method: "GET",
     path: "/dashboard/deleteplacemark/{id}",
     config: dashboardController.deletePlacemark,
+  },
+  { method: "GET", path: "/placemark/{id}", config: placemarkController.index },
+
+  {
+    method: "GET",
+    path: "/placemark/{id}",
+    config: placemarkController.showPlacemark,
+  },
+  {
+    method: "POST",
+    path: "/placemark/{id}/update",
+    config: placemarkController.updatePlacemark,
   },
 ];

@@ -6,7 +6,6 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
 
-      // Correct store + correct function name
       const placemarks = await db.placemarkStore.getUserPlacemarks(
         loggedInUser._id,
       );
@@ -39,13 +38,13 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
 
       const newPlacemark = {
-        userid: loggedInUser._id,
-        name: request.payload.name, // matches schema
+        userId: loggedInUser._id,
+        name: request.payload.name,
         description: request.payload.description,
         category: request.payload.category,
         location: request.payload.location,
-        latitude: request.payload.latitude,
-        longitude: request.payload.longitude,
+        latitude: Number(request.payload.latitude),
+        longitude: Number(request.payload.longitude),
       };
 
       await db.placemarkStore.addPlacemark(newPlacemark);
