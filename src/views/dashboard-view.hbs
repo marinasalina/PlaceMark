@@ -1,24 +1,7 @@
 {{> menu active="dashboard"}}
 <h1>{{title}}</h1> 
 <p>Welcome, {{user.firstName}}</p>
-
-
-
-    <section class="section">
-<div class="columns is-multiline mb-2">
-  <h1 class="title has-text-link">{{title}}</h1>
-    <div class="column is-full">
-      {{> add-placemark}}
-    </div>
-
-    <div class="columns is-multiline mt-2">
-    {{#each placemarks}}
-    <div class="column is-full">
-        {{> list-placemarks}} 
-
-      </div>
-    {{/each}}
-  </div>
+<section class="section">
+  {{> list-placemarks}}
+  {{> add-placemark}}
 </section>
-
-

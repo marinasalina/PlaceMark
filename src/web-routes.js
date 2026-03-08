@@ -22,16 +22,16 @@ export const webRoutes = [
     path: "/dashboard/deleteplacemark/{id}",
     config: dashboardController.deletePlacemark,
   },
-  { method: "GET", path: "/placemark/{id}", config: placemarkController.index },
+  // { method: "GET", path: "/placemark/{id}", config: placemarkController.index }
 
-  {
-    method: "GET",
-    path: "/placemark/{id}",
-    config: placemarkController.showPlacemark,
-  },
-  {
-    method: "POST",
-    path: "/placemark/{id}/update",
-    config: placemarkController.updatePlacemark,
-  },
+  // {
+  //   method: "GET",
+  //   path: "/placemark/{id}",
+  //   config: placemarkController.showPlacemark,
+  // },
+  // {
+  //   method: "POST",
+  //   path: "/placemark/{id}/update",
+  //   config: placemarkController.updatePlacemark,
+  // },
 ];

@@ -53,14 +53,20 @@ export const accountsController = {
           .code(400);
       },
     },
+
     handler: async function (request, h) {
       const { email, password } = request.payload;
+
       const user = await db.userStore.getUserByEmail(email);
+
       if (!user || user.password !== password) {
         return h.redirect("/");
       }
       request.cookieAuth.set({ id: user._id });
 
+      if (email == process.env.email_admin) {
+        return h.redirect("/about");
+      }
       return h.redirect("/dashboard");
     },
   },
