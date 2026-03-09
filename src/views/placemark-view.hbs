@@ -1,58 +1,8 @@
-<form
-  class="box"
-  action="/placemark/{{placemark._id}}/addlocation"
-  method="POST"
->
-  <label>Add Location:</label>
+{{> menu}}
 
-  <div class="field">
-    <label class="label">Name</label>
-    <input class="input" type="text" name="name" placeholder="Location name" />
-  </div>
+<h1 class="title">{{placemark.title}}</h1>
 
-  <div class="field">
-    <label class="label">Description</label>
-    <input
-      class="input"
-      type="text"
-      name="description"
-      placeholder="Description"
-    />
-  </div>
+<p>{{placemark.description}}</p>
+<p>{{placemark.location}}</p>
+<p>{{placemark.latitude}}, {{placemark.longitude}}</p>
 
-  <div class="field">
-    <label class="label">Location</label>
-    <input
-      class="input"
-      type="text"
-      name="location"
-      placeholder="Address / place name"
-    />
-  </div>
-
-  <div class="field is-horizontal">
-    <div class="field-body">
-      <div class="field">
-        <label class="label">Latitude</label>
-        <input
-          class="input"
-          type="text"
-          name="latitude"
-          placeholder="Latitude"
-        />
-      </div>
-
-      <div class="field">
-        <label class="label">Longitude</label>
-        <input
-          class="input"
-          type="text"
-          name="longitude"
-          placeholder="Longitude"
-        />
-      </div>
-    </div>
-  </div>
-
-  <button class="button is-primary">Add Location</button>
-</form>

@@ -23,7 +23,7 @@ export const UserCredentialsSpec = {
 };
 
 export const PlacemarkSpec = Joi.object({
-  name: Joi.string().required(),
+  title: Joi.string().required(),
   description: Joi.string().required(),
   category: Joi.string().required(),
   location: Joi.string().required(),

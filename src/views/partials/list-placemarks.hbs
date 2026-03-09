@@ -1,15 +1,19 @@
 {{#each placemarks}}
-  <div class="box box-link-hover-shadow">
-    <h2 class="title">
-      {{title}}
-    </h2>
-    <a href="/placemark/{{_id}}" class="button">
-      <span class="icon is-small">
-        <i class="fas fa-folder-open"></i>
-      </span>
+  <div class="box">
+    <h2 class="title is-4">{{title}}</h2>
+    <p>{{description}}</p>
+    <p>{{location}}</p>
+    <p>{{latitude}}, {{longitude}}</p>
+
+    <a
+      class="button is-small is-danger"
+      href="/dashboard/deleteplacemark/{{_id}}"
+    >
+      Delete
     </a>
-    <a href="/dashboard/deleteplacemark/{{_id}}" class="button">
-      <i class="fas fa-trash"></i>
+
+    <a class="button is-small is-info" href="/placemark/{{_id}}">
+      View
     </a>
   </div>
 {{/each}}

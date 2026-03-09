@@ -26,7 +26,7 @@ export const dashboardController = {
       failAction: function (request, h, error) {
         return h
           .view("dashboard-view", {
-            title: "Add PlaceMark Error",
+            title: "Add Placemark Error",
             errors: error.details,
           })
           .takeover()
@@ -38,8 +38,7 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
 
       const newPlacemark = {
-        userId: loggedInUser._id,
-        name: request.payload.name,
+        title: request.payload.title,
         description: request.payload.description,
         category: request.payload.category,
         location: request.payload.location,
@@ -47,17 +46,16 @@ export const dashboardController = {
         longitude: Number(request.payload.longitude),
       };
 
-      await db.placemarkStore.addPlacemark(newPlacemark);
+      await db.placemarkStore.addPlacemark(loggedInUser._id, newPlacemark);
+
       return h.redirect("/dashboard");
     },
   },
 
   deletePlacemark: {
     handler: async function (request, h) {
-      const placemark = await db.placemarkStore.getPlacemarkById(
-        request.params.id,
-      );
-      await db.placemarkStore.deletePlacemarkById(placemark._id);
+      const placemarkId = request.params.id;
+      await db.placemarkStore.deletePlacemark(placemarkId);
       return h.redirect("/dashboard");
     },
   },
