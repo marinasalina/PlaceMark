@@ -12,9 +12,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "lint": "./node_modules/.bin/eslint . --ext .js",
-    "test": "npx mocha --ui tdd test/**/*.js -exit",
-    "dev": "nodemon src/server.js --ignore 'src/models/json/*.json'"
+    "lint": "eslint . --ext .js",
+    "test": "mocha --ui tdd test/**.js -exit"
   },
   "devDependencies": {
     "chai": "^6.2.2",
@@ -22,7 +21,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin": "^1.0.1",
     "import": "^0.0.6",
-    "mocha": "^11.3.0",
+    "mocha": "^11.7.5",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.1"
   },
