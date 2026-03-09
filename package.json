@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "eslint . --ext .js",
-    "test": "mocha --ui tdd test/**.js -exit"
+    "test": "mocha --ui tdd test/**/*.js -exit"
   },
   "devDependencies": {
     "chai": "^6.2.2",

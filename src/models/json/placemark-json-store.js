@@ -7,37 +7,43 @@ export const placemarkJsonStore = {
     return db.data.placemarks;
   },
 
-  async addPlacemark(placemark) {
+  async addPlacemark(userId, placemark) {
     await db.read();
-    placemark._id = v4();
-    db.data.placemarks.push(placemark);
+    const newPlacemark = {
+      ...placemark,
+      _id: v4(),
+      userId: userId,
+    };
+    db.data.placemarks.push(newPlacemark);
     await db.write();
-    return placemark;
+    return newPlacemark;
   },
 
   async getPlacemarkById(id) {
     await db.read();
-    let list = db.data.placemarks.find((placemark) => placemark._id === id);
-    return list;
+    return db.data.placemarks.find((placemark) => placemark._id === id) || null;
   },
 
-  async getUserPlacemark(userid) {
+  async getPlacemarksByUserId(userId) {
     await db.read();
     return db.data.placemarks.filter(
-      (placemark) => placemark.userid === userid,
+      (placemark) => placemark.userId === userId,
     );
   },
 
-  async deletePlacemarkById(id) {
+  async deletePlacemark(id) {
     await db.read();
-    const index = db.data.placemark.findIndex(
+    const index = db.data.placemarks.findIndex(
       (placemark) => placemark._id === id,
     );
-    if (index !== -1) db.data.placemarks.splice(index, 1);
-    await db.write();
+    if (index !== -1) {
+      db.data.placemarks.splice(index, 1);
+      await db.write();
+    }
   },
 
-  async deleteAllPlacemark() {
+  async deleteAllPlacemarks() {
+    await db.read();
     db.data.placemarks = [];
     await db.write();
   },

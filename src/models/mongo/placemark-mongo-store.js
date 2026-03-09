@@ -3,36 +3,30 @@ import { Placemark } from "./placemark.js";
 
 export const placemarkMongoStore = {
   async getAllPlacemarks() {
-    const placemarks = await Placemark.find().lean();
-    return placemarks;
+    return Placemark.find().lean();
   },
 
   async getPlacemarkById(id) {
-    if (Mongoose.isValidObjectId(id)) {
-      const placemark = await Placemark.findOne({ _id: id }).lean();
-
-      return placemark;
-    }
-    return null;
+    if (!Mongoose.isValidObjectId(id)) return null;
+    return Placemark.findById(id).lean();
   },
 
-  async addPlacemark(placemark) {
-    const newPlacemark = new Placemark(placemark);
-    const placemarkObj = await newPlacemark.save();
-    return this.getPlacemarkById(placemarkObj._id);
+  async addPlacemark(userId, placemark) {
+    const newPlacemark = new Placemark({
+      ...placemark,
+      userId: userId,
+    });
+    const savedPlacemark = await newPlacemark.save();
+    return this.getPlacemarkById(savedPlacemark._id);
   },
 
-  async getUserPlacemarks(id) {
-    const placemark = await Placemark.find({ userId: id }).lean();
-    return placemark;
+  async getPlacemarksByUserId(userId) {
+    return Placemark.find({ userId }).lean();
   },
 
-  async deletePlacemarkById(id) {
-    try {
-      await Placemark.deleteOne({ _id: id });
-    } catch (error) {
-      console.log("bad id");
-    }
+  async deletePlacemark(id) {
+    if (!Mongoose.isValidObjectId(id)) return;
+    await Placemark.deleteOne({ _id: id });
   },
 
   async deleteAllPlacemarks() {

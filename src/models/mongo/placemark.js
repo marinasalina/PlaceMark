@@ -3,7 +3,7 @@ import Mongoose from "mongoose";
 const { Schema } = Mongoose;
 
 const placemarkSchema = new Schema({
-  name: String,
+  title: String,
   description: String,
   category: String,
   location: String,
