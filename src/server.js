@@ -32,6 +32,7 @@ const swaggerOptions = {
 };
 async function init() {
   const server = Hapi.server({
+    // Render assign a random port and still works locally
     port: process.env.PORT || 3000,
   });
 
