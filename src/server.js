@@ -12,6 +12,8 @@ import Joi from "joi";
 import Inert from "@hapi/inert";
 import HapiSwagger from "hapi-swagger";
 import { apiRoutes } from "./api-routes.js";
+import dns from "dns";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
