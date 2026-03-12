@@ -38,6 +38,7 @@ suite("User API tests", () => {
       assert(error.response.data.message === "No User with this id");
     }
   });
+  //An invalid Id, or the service not available
   test("get a user - bad id", async () => {
     try {
       const returnedUser = await placemarkService.getUser("1234");
@@ -47,7 +48,7 @@ suite("User API tests", () => {
       assert.equal(error.response.data.statusCode, 404);
     }
   });
-
+  // A valid id, but not user, also pass if user has been deleted
   test("get a user - deleted user", async () => {
     await placemarkService.deleteAllUsers();
     try {
