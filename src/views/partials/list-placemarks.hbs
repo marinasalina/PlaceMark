@@ -1,0 +1,19 @@
+{{#each placemarks}}
+  <div class="box">
+    <h2 class="title is-4">{{title}}</h2>
+    <p>{{description}}</p>
+    <p>{{location}}</p>
+    <p>{{latitude}}, {{longitude}}</p>
+
+    <a
+      class="button is-small is-danger"
+      href="/dashboard/deleteplacemark/{{_id}}"
+    >
+      Delete
+    </a>
+
+    <a class="button is-small is-info" href="/placemark/{{_id}}">
+      View
+    </a>
+  </div>
+{{/each}}

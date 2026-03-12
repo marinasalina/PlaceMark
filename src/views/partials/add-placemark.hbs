@@ -1,0 +1,78 @@
+<form action="/dashboard/addplacemark" method="POST">
+  <div class="field">
+    <label class="label">Placemark Name</label>
+    <input
+      class="input"
+      type="text"
+      name="title"
+      placeholder="Enter placemark name"
+    />
+  </div>
+
+  <div class="field">
+    <label class="label">Description</label>
+    <input
+      class="input"
+      type="text"
+      name="description"
+      placeholder="Enter description"
+    />
+  </div>
+
+  <div class="field">
+    <label class="label">Location</label>
+    <input
+      class="input"
+      type="text"
+      name="location"
+      placeholder="Enter location name"
+    />
+  </div>
+
+  <div class="field">
+    <label class="label">Category</label>
+    <div class="select is-fullwidth">
+      <select name="category">
+        <option value="Park">Park</option>
+        <option value="Castle">Castle</option>
+        <option value="Landmarks">Landmarks</option>
+        <option value="Historic sites">Historic Sites</option>
+        <option value="Viewpoints">Viewpoints</option>
+        <option value="River">River</option>
+        <option value="Food and drink">Food and Drinks</option>
+        <option value="Tours">Tours</option>
+        <option value="Statue">Statue</option>
+        <option value="Monument">Monument</option>
+        <option value="Museum">Museum</option>
+        <option value="Bridge">Bridge</option>
+        <option value="Expiriences">Experiences</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">Latitude</label>
+        <input
+          class="input"
+          type="text"
+          name="latitude"
+          placeholder="Latitude"
+        />
+      </div>
+
+      <div class="field">
+        <label class="label">Longitude</label>
+        <input
+          class="input"
+          type="text"
+          name="longitude"
+          placeholder="Longitude"
+        />
+      </div>
+    </div>
+  </div>
+
+  <button class="button is-link">Add Placemark</button>
+</form>

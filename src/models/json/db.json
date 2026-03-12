@@ -1,0 +1,88 @@
+{
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "_id": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret",
+      "_id": "5e97c6ba-cfad-41b0-98a4-61721e8f8466"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret",
+      "_id": "92e94e0a-6408-4976-a783-b452546f6bab"
+    }
+  ],
+
+  "placemarks": [
+    {
+      "title": "The Spire of Dublin",
+      "description": "A 120-metre stainless steel monument located on O'Connell Street in Dublin.",
+      "category": "Monument",
+      "location": "Dublin, Ireland",
+      "latitude": "53.3498",
+      "longitude": "-6.2603",
+      "image": "../../public/images/pexels-picography-4467.jpg",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "title": "Ha'penny Bridge",
+      "description": " Iconic pedestrian bridge crossing the River Liffey, built in 1816.",
+      "category": "Bridge",
+      "location": "Dublin, Ireland",
+      "latitude": "53.3463",
+      "longitude": "-6.2631",
+      "image": "../../public/images/pexels-erik-glauber-1310046025-24809739.jpg",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "title": "Trinity College & Book of Kells",
+      "description": " Ireland’s oldest university and home to the famous Book of Kells.",
+      "category": "Museum",
+      "location": "Dublin, Ireland",
+      "latitude": "53.3438",
+      "longitude": "-6.2546",
+      "image": "../../public/images/pexels-kelly-2881370.jpg",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "title": "Phoenix park",
+      "description": " One of Europe’s largest city parks, home to wild deer and the President’s residence.",
+      "category": "Park",
+      "location": "Dublin, Ireland",
+      "latitude": "53.355",
+      "longitude": "-6.329",
+      "image": "../../public/images/pexels-taha-karabulut-380079956-20480594.jpg",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "title": "Guiness Storehouse",
+      "description": " Ireland’s most visited attraction, ending with a pint at the Gravity Bar.",
+      "category": "Experiences",
+      "location": "Dublin, Ireland",
+      "latitude": "53.3419",
+      "longitude": "-6.286",
+      "image": "../../public/images/pexels-pixabay-63633.jpg",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    },
+    {
+      "title": "Dublin Castle",
+      "description": " 13th‑century castle complex with museums and gardens.",
+      "category": "Museum",
+      "location": "Dublin, Ireland",
+      "latitude": "53.3429",
+      "longitude": "-6.2675",
+      "image": "../../public/images/pexels-jonathanborba-33758913.jpg",
+      "userId": "d7ebe3f4-5eaf-4d7f-a1da-f18c2bbe5df9"
+    }
+  ]
+}
