@@ -5,13 +5,21 @@ export const apiRoutes = [
   { method: "POST", path: "/api/users", config: userApi.create },
   { method: "DELETE", path: "/api/users", config: userApi.deleteAllUsers },
   { method: "GET", path: "/api/users/{id}", config: userApi.findOne },
-  { method: "POST", path: "/api/playlists", config: placemarkApi.create },
-  { method: "DELETE", path: "/api/playlists", config: placemarktApi.deleteAll },
-  { method: "GET", path: "/api/playlists", config: placemarktApi.find },
-  { method: "GET", path: "/api/playlists/{id}", config: placemark.findOne },
+  { method: "POST", path: "/api/placemarklists", config: placemarkApi.create },
   {
     method: "DELETE",
-    path: "/api/playlists/{id}",
+    path: "/api/placemarklists",
+    config: placemarkApi.deleteAll,
+  },
+  { method: "GET", path: "/api/placemarklists", config: placemarkApi.find },
+  {
+    method: "GET",
+    path: "/api/placemarklists/{id}",
+    config: placemark.findOne,
+  },
+  {
+    method: "DELETE",
+    path: "/api/placemarklists/{id}",
     config: placemarkApi.deleteOne,
   },
 ];
