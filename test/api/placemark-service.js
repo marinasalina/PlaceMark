@@ -23,37 +23,33 @@ export const placemarkService = {
     const res = await axios.delete(`${this.placemarkUrl}/api/users`);
     return res.data;
   },
-  async createPlacemarklist(placemarklist) {
+  async createPlacemark(placemark) {
     const res = await axios.post(
-      `${this.placemarkUrl}/api/placemarklists`,
-      placemarklist,
+      `${this.placemarkUrl}/api/placemarks`,
+      placemark,
     );
     return res.data;
   },
 
-  async deleteAllPlacemaklists() {
-    const response = await axios.delete(
-      `${this.placemarkUrl}/api/placemarklists`,
-    );
+  async deleteAllPlacemarks() {
+    const response = await axios.delete(`${this.placemarkUrl}/api/placemarks`);
     return response.data;
   },
 
-  async deletePlacemarklist(id) {
+  async deletePlacemark(id) {
     const response = await axios.delete(
-      `${this.placemarkUrl}/api/placemarklists/${id}`,
+      `${this.placemarkUrl}/api/placemarks/${id}`,
     );
     return response;
   },
 
-  async getAllPlacemarklists() {
-    const res = await axios.get(`${this.placemarkUrl}/api/placemarklists`);
+  async getAllPlacemarks() {
+    const res = await axios.get(`${this.placemarkUrl}/api/placemarks`);
     return res.data;
   },
 
-  async getPlacemarklist(id) {
-    const res = await axios.get(
-      `${this.placemarkeUrl}/api/placemarklists/${id}`,
-    );
+  async getPlacemark(id) {
+    const res = await axios.get(`${this.placemarkUrl}/api/placemarks/${id}`);
     return res.data;
   },
 };

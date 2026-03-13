@@ -29,7 +29,7 @@ export const testUsers = [
 ];
 
 // Single placemark used in tests
-export const testPlacemarklist = {
+export const testPlacemark = {
   title: "River Lee",
   description: "River running through Cork city",
   location: "Cork, Ireland",
@@ -39,7 +39,7 @@ export const testPlacemarklist = {
 };
 
 // Multiple placemarks for tests
-export const testPlacemarklists = [
+export const testPlacemarks = [
   {
     title: "The Spire of Dublin",
     description:
