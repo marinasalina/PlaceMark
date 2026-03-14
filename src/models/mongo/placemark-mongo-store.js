@@ -12,6 +12,7 @@ export const placemarkMongoStore = {
   },
 
   async addPlacemark(userId, placemark) {
+    console.log("Saving placemark for user:", userId);
     const newPlacemark = new Placemark({
       ...placemark,
       userId: userId,

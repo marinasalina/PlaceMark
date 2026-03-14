@@ -10,6 +10,8 @@ export const UserSpec = Joi.object()
     lastName: Joi.string().example("Simpson").required(),
     email: Joi.string().email().example("homer@simpson.com").required(),
     password: Joi.string().example("secret").required(),
+    _id: IdSpec,
+    __v: Joi.number(),
   })
   .label("UserDetails");
 
@@ -25,6 +27,8 @@ export const PlacemarkSpec = Joi.object({
   description: Joi.string().required(),
   category: Joi.string().required(),
   location: Joi.string().required(),
-  latitude: Joi.string().required(),
-  longitude: Joi.string().required(),
+  latitude: Joi.number().required(),
+  longitude: Joi.number().required(),
+  img: Joi.array().items(Joi.string()).default([]),
+  userId: IdSpec.required(),
 });

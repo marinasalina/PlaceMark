@@ -34,10 +34,12 @@ export const placemarkApi = {
   create: {
     auth: false,
     handler: async function (request, h) {
+      console.log("➡️ CREATE route hit");
+      console.log("Payload received:", request.payload);
       try {
         const placemark = request.payload;
         const newPlacemark = await db.placemarkStore.addPlacemark(
-          placemark.userid,
+          placemark.userId,
           placemark,
         );
         if (newPlacemark) {
