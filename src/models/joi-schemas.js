@@ -30,5 +30,4 @@ export const PlacemarkSpec = Joi.object({
   latitude: Joi.number().required(),
   longitude: Joi.number().required(),
   img: Joi.array().items(Joi.string()).default([]),
-  userId: IdSpec.required(),
 });

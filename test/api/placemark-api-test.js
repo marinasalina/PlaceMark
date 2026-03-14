@@ -21,6 +21,13 @@ suite("Placemark API tests", function () {
     user = await placemarkService.createUser(maggie);
   });
 
+  test("create placemark", async () => {
+    const returnedPlacemark =
+      await placemarkService.createPlacemark(testPlacemark);
+    assert.isNotNull(returnedPlacemark);
+    assertSubset(testPlacemark, returnedPlacemark);
+  });
+
   test("delete a placemark", async () => {
     const placemark = await placemarkService.createPlacemark({
       ...testPlacemark,
