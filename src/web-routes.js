@@ -2,6 +2,7 @@ import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
 import { placemarkController } from "./controllers/placemark-controller.js";
+import { categoryController } from "./controllers/category-controller.js";
 
 export const webRoutes = [
   // Account controller
@@ -35,6 +36,8 @@ export const webRoutes = [
     path: "/placemark/{id}/edit",
     config: placemarkController.editPlacemark,
   },
+  { method: "GET", path: "/category", config: categoryController.index },
+
   {
     method: "GET",
     path: "/{param*}",

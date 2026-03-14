@@ -23,8 +23,12 @@ export const placemarkJsonStore = {
     await db.read();
     return db.data.placemarks.find((placemark) => placemark._id === id) || null;
   },
-  getUserPlacemarks(userId) {
-    return db.placemarks.filter((placemark) => placemark.userId === userId);
+
+  async getUserPlacemarks(userId) {
+    await db.read();
+    return db.data.placemarks.filter(
+      (placemark) => placemark.userId === userId,
+    );
   },
 
   async getPlacemarksByUserId(userId) {

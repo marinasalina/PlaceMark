@@ -6,14 +6,25 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
 
+      if (!loggedInUser) {
+        console.log("No logged-in user — redirecting to login");
+        return h.redirect("/");
+      }
+      // convert objectId to string
+      loggedInUser._id = loggedInUser._id.toString();
+
       const placemarks = await db.placemarkStore.getUserPlacemarks(
         loggedInUser._id,
       );
+
+      const categories = placemarks.map((p) => p.category);
+      const uniqueCategories = [...new Set(categories)];
 
       const viewData = {
         title: "PlaceMark Dashboard",
         user: loggedInUser,
         placemarks: placemarks,
+        categories: uniqueCategories,
       };
       return h.view("dashboard-view", viewData);
     },
@@ -23,10 +34,20 @@ export const dashboardController = {
     validate: {
       payload: PlacemarkSpec,
       options: { abortEarly: false },
-      failAction: function (request, h, error) {
+
+      // failAction — keeps user + placemarks
+      failAction: async function (request, h, error) {
+        const loggedInUser = request.auth.credentials;
+
+        const placemarks = loggedInUser
+          ? await db.placemarkStore.getUserPlacemarks(loggedInUser._id)
+          : [];
+
         return h
           .view("dashboard-view", {
             title: "Add Placemark Error",
+            user: loggedInUser,
+            placemarks: placemarks,
             errors: error.details,
           })
           .takeover()
@@ -37,6 +58,12 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
 
+      // Prevent undefined userId
+      if (!loggedInUser) {
+        console.log("No logged-in user — cannot save placemark");
+        return h.redirect("/");
+      }
+
       const newPlacemark = {
         title: request.payload.title,
         description: request.payload.description,
@@ -44,6 +71,7 @@ export const dashboardController = {
         location: request.payload.location,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
+        userId: loggedInUser._id,
       };
 
       await db.placemarkStore.addPlacemark(loggedInUser._id, newPlacemark);

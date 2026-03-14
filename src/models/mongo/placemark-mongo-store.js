@@ -21,6 +21,10 @@ export const placemarkMongoStore = {
     return this.getPlacemarkById(savedPlacemark._id);
   },
 
+  async getPlacemarksByUserIdAndCategory(userId, category) {
+    return Placemark.find({ userId: userId, category: category }).lean();
+  },
+
   async getUserPlacemarks(userId) {
     return Placemark.find({ userId }).lean();
   },

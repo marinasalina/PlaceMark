@@ -4,6 +4,8 @@ export const placemarkController = {
   index: {
     handler: async function (request, h) {
       const placemarkId = request.params.id;
+
+      const userId = request.query.userId;
       const placemark = await db.placemarkStore.getPlacemarkById(placemarkId);
 
       if (!placemark) {

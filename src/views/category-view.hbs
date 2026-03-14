@@ -1,9 +1,11 @@
 {{> menu active="dashboard"}}
-<h1>{{title}}</h1> 
-<p>Welcome, {{user.firstName}}</p>
+
 <section class="section">
+  <h1 class="title">Category: {{category}}</h1>
+
+  <h2 class="title is-4">Placemarks in this category</h2>
   {{> list-placemarks placemarks=placemarks user=user}}
-  {{> add-placemark}}
+
  <h2 class="title is-4">Categories</h2>
 
 {{#each categories}}
@@ -13,6 +15,5 @@
   </a>
 {{/each}}
 
-
-
+  </div>
 </section>
