@@ -4,34 +4,34 @@ export const categoryController = {
   index: {
     handler: async function (request, h) {
       const category = request.query.category;
-      const userId = request.query.userId;
 
-      // Load the full user
-      const user = await db.userStore.getUserById(userId);
+      // Use the logged-in user instead of userId from URL
+      const loggedInUser = request.auth.credentials;
 
-      // If user is null, stop the crash
-      if (!user) {
-        console.log("User not found for ID:", userId);
-        return h.redirect("/dashboard");
+      if (!loggedInUser) {
+        console.log("No logged-in user");
+        return h.redirect("/");
       }
 
       // Convert ObjectId to string
-      user._id = user._id.toString();
+      loggedInUser._id = loggedInUser._id.toString();
 
       // Load placemarks for this category
       const placemarks =
         await db.placemarkStore.getPlacemarksByUserIdAndCategory(
-          user._id,
+          loggedInUser._id,
           category,
         );
 
       // Load all categories for this user
-      const allPlacemarks = await db.placemarkStore.getUserPlacemarks(user._id);
+      const allPlacemarks = await db.placemarkStore.getUserPlacemarks(
+        loggedInUser._id,
+      );
       const categories = [...new Set(allPlacemarks.map((p) => p.category))];
 
       return h.view("category-view", {
         title: `Category: ${category}`,
-        user: user,
+        user: loggedInUser,
         category: category,
         placemarks: placemarks,
         categories: categories,

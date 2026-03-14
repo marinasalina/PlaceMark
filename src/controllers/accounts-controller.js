@@ -55,6 +55,7 @@ export const accountsController = {
     },
 
     handler: async function (request, h) {
+      request.cookieAuth.clear();
       const { email, password } = request.payload;
 
       const user = await db.userStore.getUserByEmail(email);
@@ -62,14 +63,26 @@ export const accountsController = {
       if (!user || user.password !== password) {
         return h.redirect("/");
       }
+
+      // Correct admin check
+      if (
+        email === process.env.EMAIL_ADMIN &&
+        password === process.env.password
+      ) {
+        user.isAdmin = true; // no updateUser() needed
+      }
+
       request.cookieAuth.set({ id: user._id });
 
-      if (email == process.env.email_admin) {
-        return h.redirect("/about");
+      // Redirect admins to admin dashboard
+      if (user.isAdmin) {
+        return h.redirect("/admin");
       }
+
       return h.redirect("/dashboard");
     },
   },
+
   logout: {
     auth: false,
     handler: function (request, h) {
