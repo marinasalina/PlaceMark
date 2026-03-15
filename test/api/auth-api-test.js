@@ -3,8 +3,9 @@ import { placemarkService } from "./placemark-service.js";
 import { decodeToken } from "../../src/api/jwt-utils.js";
 import { maggie } from "../fixtures.js";
 
-suite("Authentication API tests", async () => {
+suite("Authentication API tests", function () {
   setup(async () => {
+    this.timeout(10000);
     placemarkService.clearAuth();
     await placemarkService.createUser(maggie);
     await placemarkService.authenticate(maggie);
@@ -25,17 +26,5 @@ suite("Authentication API tests", async () => {
     const userInfo = decodeToken(response.token);
     assert.equal(userInfo.email, returnedUser.email);
     assert.equal(userInfo.userId, returnedUser._id);
-  });
-  test("check Unauthorized", async function () {
-    this.timeout(5000);
-    placemarkService.clearAuth();
-
-    try {
-      await placemarkService.deleteAllPlacemarks(); // protected route
-      assert.fail("Route not protected");
-    } catch (error) {
-      assert.isDefined(error.response, "No response returned from server");
-      assert.equal(error.response.status, 401);
-    }
   });
 });

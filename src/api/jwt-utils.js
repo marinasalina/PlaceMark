@@ -1,33 +1,23 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import { db } from "../models/db.js";
 
-const result = dotenv.config();
-
+// Create a JWT for a user
 export function createToken(user) {
-  const payload = {
-    id: user._id,
-    email: user.email,
-  };
-  const options = {
-    algorithm: "HS256",
+  return jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
     expiresIn: "1h",
-  };
-  return jwt.sign(payload, process.env.cookie_password, options);
+  });
 }
 
+// Decode and verify a JWT
 export function decodeToken(token) {
-  const userInfo = {};
   try {
-    const decoded = jwt.verify(token, process.env.cookie_password);
-    userInfo.userId = decoded.id;
-    userInfo.email = decoded.email;
-  } catch (e) {
-    console.log(e.message);
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    console.log("Invalid token:", err.message);
+    return null;
   }
-  return userInfo;
 }
-
+// Validate a decoded JWT (used by Hapi auth strategy)
 export async function validate(decoded, request) {
   const user = await db.userStore.getUserById(decoded.id);
   if (!user) {

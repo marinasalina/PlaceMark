@@ -15,10 +15,16 @@ suite("Placemark API tests", function () {
   // Using a regular function so Mocha can apply this.timeout(), which prevents Atlas delays from causing test timeouts. Using a regular function so Mocha can apply this.timeout(), which prevents Atlas delays from causing test timeouts.
   this.timeout(10000);
   let user = null;
+
   setup(async () => {
+    placemarkService.clearAuth();
+    user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
     await placemarkService.deleteAllPlacemarks();
     await placemarkService.deleteAllUsers();
     user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
+    placemark.userid = user._id;
   });
 
   test("create placemark", async () => {

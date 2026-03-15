@@ -84,6 +84,8 @@ export const userApi = {
   authenticate: {
     auth: false,
     handler: async function (request, h) {
+      console.log("AUTH ROUTE HIT");
+      console.log("Payload:", request.payload);
       try {
         const user = await db.userStore.getUserByEmail(request.payload.email);
         if (!user) {
