@@ -69,7 +69,7 @@ export const accountsController = {
         email === process.env.EMAIL_ADMIN &&
         password === process.env.password
       ) {
-        user = await db.userStore.makeUserAdmin(user.email);
+        user = await db.userStore.updateUser(user._id, { isAdmin: true });
       }
 
       request.cookieAuth.set({ id: user._id });

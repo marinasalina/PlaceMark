@@ -39,9 +39,11 @@ export const userMongoStore = {
     await User.deleteMany({});
   },
 
-  async makeUserAdmin(email) {
-    await User.updateOne({ email: email }, { $set: { isAdmin: true } });
-    console.log("hello", email);
-    return this.getUserByEmail(email);
+  async updateUser(id, updates) {
+    if (Mongoose.isValidObjectId(id)) {
+      await User.updateOne({ _id: id }, { $set: updates });
+      return this.getUserById(id);
+    }
+    return null;
   },
 };
