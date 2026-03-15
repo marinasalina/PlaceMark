@@ -1,10 +1,14 @@
+<!-- Main navigation bar -->
 <nav class="navbar">
+   <!-- Brand/logo section (loaded from a Handlebars partial) -->
   <div class="navbar-brand">
     {{> brand}}
   </div>
+   <!-- Navigation menu -->
   <div class="navbar-menu" id="navMenu">
     <div class="navbar-end">
       <div class="navbar-item">
+         <!-- Navigation buttons -->
         <div class="buttons">
           <a id="dashboard" class="button" href="/dashboard"> Dashboard </a>
           <a id="about" class="button" href="/about"> About </a>

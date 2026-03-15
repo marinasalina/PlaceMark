@@ -1,11 +1,11 @@
 {{> menu active="dashboard"}}
+<!-- Page title -->
 <h1>{{title}}</h1> 
 <p>Welcome, {{user.firstName}}</p>
 <section class="section">
+  <!-- Display all placemarks belonging to the user -->
   {{> list-placemarks placemarks=placemarks user=user}}
+    <!-- Form to add a new placemark -->
   {{> add-placemark}}
-
-
-
 
 </section>

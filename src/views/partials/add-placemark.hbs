@@ -1,4 +1,6 @@
+<!-- Form to add a new placemark -->
 <form action="/dashboard/addplacemark" method="POST">
+  <!-- Placemark title input -->
   <div class="field">
     <label class="label">Placemark Name</label>
     <input
@@ -9,6 +11,7 @@
     />
   </div>
 
+  <!-- Description input -->
   <div class="field">
     <label class="label">Description</label>
     <input
@@ -18,7 +21,7 @@
       placeholder="Enter description"
     />
   </div>
-
+  <!-- Location input -->
   <div class="field">
     <label class="label">Location</label>
     <input
@@ -29,6 +32,7 @@
     />
   </div>
 
+  <!-- Category dropdown -->
   <div class="field">
     <label class="label">Category</label>
     <div class="select is-fullwidth">
@@ -49,7 +53,7 @@
       </select>
     </div>
   </div>
-
+  <!-- Latitude and longitude inputs -->
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
@@ -74,5 +78,7 @@
     </div>
   </div>
 
+  <!-- Submit button -->
+  <!-- Submit button -->
   <button class="button is-link">Add Placemark</button>
 </form>

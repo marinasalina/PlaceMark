@@ -8,23 +8,26 @@ import { placemarkMongoStore } from "./mongo/placemark-mongo-store.js";
 
 export const db = {
   userStore: null,
+  // Initialise the data stores based on the chosen storage type (memory, JSON, or MongoDB)
   placemarkStore: null,
 
   init(storeType) {
     switch (storeType) {
       case "json":
+        // Use JSON file-based storage
         this.userStore = userJsonStore;
         this.placemarkStore = placemarkJsonStore;
 
         break;
       case "mongo":
+        // Use MongoDB storage via Mongoose models
         this.userStore = userMongoStore;
         this.placemarkStore = placemarkMongoStore;
 
-        connectMongo();
+        connectMongo(); // Establish MongoDB connection
         break;
 
-      default:
+      default: // Fallback to in-memory storage
         this.userStore = userMemStore;
         this.placemarkStore = placemarkMemStore;
     }

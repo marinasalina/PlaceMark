@@ -1,6 +1,6 @@
 import { userApi } from "./api/user-api.js";
 import { placemarkApi } from "./api/placemark-api.js";
-
+// List of all API routes for users and placemarks
 export const apiRoutes = [
   { method: "GET", path: "/api/users", config: userApi.find },
   { method: "POST", path: "/api/users", config: userApi.create },

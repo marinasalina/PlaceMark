@@ -1,3 +1,5 @@
+// // API endpoints for managing placemarks, including validation and database error handling
+
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { validationError } from "./logger.js";
@@ -8,6 +10,7 @@ import {
   IdSpec,
 } from "../models/joi-schemas.js";
 
+// Get all placemarks from the database
 export const placemarkApi = {
   find: {
     auth: {
@@ -27,6 +30,7 @@ export const placemarkApi = {
     notes: "Returns all placemarks",
   },
 
+  // Get a single placemark by its ID
   findOne: {
     auth: {
       strategy: "jwt",
@@ -50,7 +54,7 @@ export const placemarkApi = {
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: PlacemarkSpecPlus, failAction: validationError },
   },
-
+  // Create a new placemark for a user
   create: {
     auth: {
       strategy: "jwt",
@@ -77,6 +81,7 @@ export const placemarkApi = {
     response: { schema: PlacemarkSpecPlus, failAction: validationError },
   },
 
+  // Delete a single placemark by ID
   deleteOne: {
     auth: {
       strategy: "jwt",
@@ -100,6 +105,7 @@ export const placemarkApi = {
     validate: { params: { id: IdSpec }, failAction: validationError },
   },
 
+  // Delete all placemarks in the database
   deleteAll: {
     auth: {
       strategy: "jwt",

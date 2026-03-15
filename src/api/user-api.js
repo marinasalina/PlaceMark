@@ -9,8 +9,9 @@ import {
 } from "../models/joi-schemas.js";
 import { createToken } from "./jwt-utils.js";
 
-//users endpoint
+// Users API: handles user data, authentication, and admin utilities
 export const userApi = {
+  // Get a list of all users
   find: {
     auth: false,
     handler: async function (request, h) {
@@ -26,7 +27,7 @@ export const userApi = {
     notes: "Returns details of all userApi",
     response: { schema: UserArray, failAction: validationError },
   },
-
+  // Get a single user by ID
   findOne: {
     auth: false,
     handler: async function (request, h) {
@@ -46,7 +47,7 @@ export const userApi = {
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: UserSpecPlus, failAction: validationError },
   },
-
+  // Create a new user account
   create: {
     auth: false,
     handler: async function (request, h) {
@@ -66,7 +67,7 @@ export const userApi = {
     validate: { payload: UserSpec, failAction: validationError },
     response: { schema: UserSpecPlus, failAction: validationError },
   },
-
+  // Delete all users (for testing and resetting data)
   deleteAll: {
     auth: false,
     handler: async function (request, h) {
@@ -81,6 +82,7 @@ export const userApi = {
     description: "Delete all userApi",
     notes: "All userApi removed from Playtime",
   },
+  // Authenticate a user and return a JWT token
   authenticate: {
     auth: false,
     handler: async function (request, h) {

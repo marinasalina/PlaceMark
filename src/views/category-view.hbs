@@ -1,10 +1,11 @@
 {{> menu active="dashboard"}}
 
 <section class="section">
+  <!-- Page heading showing the selected category -->
   <h1 class="title">Categories: {{category}}</h1>
-
+<!-- Reuse the placemark list partial to display placemarks for this category -->
   {{> list-placemarks placemarks=placemarks user=user}}
-
+<!-- Display buttons for all available categories -->
 {{#each categories}}
   <a class="button is-link is-light"
      href="/category?category={{this}}&userId={{../user._id}}">

@@ -1,5 +1,5 @@
 import { db } from "../models/db.js";
-
+// Controller for displaying placemarks filtered by category for the logged‑in user
 export const categoryController = {
   index: {
     handler: async function (request, h) {

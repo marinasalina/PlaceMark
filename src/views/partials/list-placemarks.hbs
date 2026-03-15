@@ -1,12 +1,13 @@
+<!--   Loop through all placemarks passed to the view-->
 {{#each placemarks}}
   <div class="box">
-  
+  <!-- Placemark details  -->
     <h2 class="title is-4">Placemark name: {{title}}</h2>
     <p><strong>Descriprion:</strong> {{description}}</p>
     <p><strong>Location:</strong> {{location}}</p>
     <p><strong>Latitude:</strong> {{latitude}}, <strong>Longitude:</strong> {{longitude}}</p>
     <p><strong>Category:</strong> {{category}}</p>
-
+<!-- Button to view all placemarks in the same category for this user -->
  <a
   class="button is-small is-primary"
   href="/category?category={{category}}&userId={{../../user._id}}"
@@ -15,14 +16,14 @@
 </a>
 
 
-
+<!-- Delete this placemark  -->
     <a
       class="button is-small is-danger"
       href="/dashboard/deleteplacemark/{{_id}}"
     >
       Delete
     </a>
-
+<!-- View this placemark's full details -->
     <a class="button is-small is-info" href="/placemark/{{_id}}">
       View
     </a>

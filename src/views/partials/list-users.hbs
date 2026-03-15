@@ -1,3 +1,4 @@
+<!-- Table displaying all registered users for admin dashboard -->
 <table class="table">
   <thead>
     <tr>
@@ -8,11 +9,14 @@
     </tr>
   </thead>
   <tbody>
+    <!-- Loop through each user passed to rhe view -->
     {{#each users}}
       <tr>
+        <!-- User details -->
         <td>{{firstName}}</td>
         <td>{{lastName}}</td>
         <td>{{email}}</td>
+        <!-- Admin action: delete user -->
         <td>
           <a
             href="/admin/users/delete/{{_id}}"

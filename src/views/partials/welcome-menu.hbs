@@ -1,11 +1,14 @@
+<!-- Navigation bar for login and signup pages -->
 <div class="navbar" role="navigation" aria-label="main navigation">
+    <!-- Brand section -->
   <div class="navbar-brand">
     {{> brand}}
   </div>
-
+  <!-- Navigation menu -->
   <div class="navbar-menu is-active">
     <div class="navbar-end">
       <div class="navbar-item">
+         <!-- Buttons for authentication pages -->
         <div class="buttons">
           <a class="button" id="login" href="/login">Log in</a>
           <a class="button" id="signup" href="/signup">Sign up</a>
@@ -14,7 +17,7 @@
     </div>
   </div>
 </div>
-
+<!-- Highlight the active button based on the value passed from the controller -->
 <script>
   document.getElementById("{{active}}").classList.add("is-primary");
 </script>

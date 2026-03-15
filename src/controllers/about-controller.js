@@ -1,3 +1,4 @@
+// Controller for rendering the About page view
 export const aboutController = {
   index: {
     handler: function (request, h) {
