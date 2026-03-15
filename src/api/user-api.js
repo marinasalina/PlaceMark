@@ -84,20 +84,18 @@ export const userApi = {
   authenticate: {
     auth: false,
     handler: async function (request, h) {
-      console.log("2   !!!!!!!!!!!!!!!!");
       try {
         const user = await db.userStore.getUserByEmail(request.payload.email);
-        console.log("New user   !!!!!!!!!!!!!!!!", user);
+
         if (!user) {
           return Boom.unauthorized("User not found");
         }
         if (user.password !== request.payload.password) {
-          console.log("!   !!!!!!!!!!!!!!!!");
           return Boom.unauthorized("Invalid password");
         }
-        console.log("Marina   !!!!!!!!!!!!!!!!");
+
         const token = createToken(user);
-        console.log("!!!!!!!!!!!!!!!!", user);
+
         return h.response({ success: true, token: token }).code(201);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");

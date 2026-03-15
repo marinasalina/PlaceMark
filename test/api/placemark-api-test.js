@@ -27,7 +27,7 @@ suite("Placemark API tests", function () {
     placemark.userid = user._id;
   });
 
-  test("create placemark", async () => {
+  test.only("create placemark", async () => {
     const returnedPlacemark =
       await placemarkService.createPlacemark(testPlacemark);
     assert.isNotNull(returnedPlacemark);

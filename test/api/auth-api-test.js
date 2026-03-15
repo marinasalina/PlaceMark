@@ -12,6 +12,8 @@ suite("Authentication API tests", function () {
     await placemarkService.authenticate(maggie);
 
     await placemarkService.deleteAllUsers();
+
+    process.env.JWT_SECRET = "secret";
   });
 
   test("authenticate", async () => {
@@ -23,10 +25,12 @@ suite("Authentication API tests", function () {
 
   test("verify Token", async () => {
     const returnedUser = await placemarkService.createUser(maggie);
+
     const response = await placemarkService.authenticate(maggie);
 
     const userInfo = decodeToken(response.token);
+
     assert.equal(userInfo.email, returnedUser.email);
-    assert.equal(userInfo.userId, returnedUser._id);
+    assert.equal(userInfo.id, returnedUser._id);
   });
 });
