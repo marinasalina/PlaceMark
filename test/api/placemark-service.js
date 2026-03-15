@@ -42,7 +42,8 @@ export const placemarkService = {
 
   async deletePlacemark(id) {
     const res = await axios.delete(`${this.placemarkUrl}/api/placemarks/${id}`);
-    return res.data;
+
+    return res;
   },
 
   async getAllPlacemarks() {

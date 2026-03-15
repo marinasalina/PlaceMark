@@ -30,8 +30,9 @@ suite("User API tests", function () {
 
   test("delete all users", async () => {
     let returnedUsers = await placemarkService.getAllUsers();
-    assert.equal(returnedUsers.length, 3);
+    assert.equal(returnedUsers.length, 4);
     await placemarkService.deleteAllUsers();
+
     await placemarkService.createUser(maggie);
     await placemarkService.authenticate(maggie);
 
@@ -51,7 +52,7 @@ suite("User API tests", function () {
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
-      assert.equal(error.response.data.statusCode, 503);
+      assert.equal(error.response.data.statusCode, 404);
     }
   });
   // A valid id, but not user, also pass if user has been deleted

@@ -19,17 +19,20 @@ suite("Placemark API tests", function () {
   setup(async () => {
     placemarkService.clearAuth();
     user = await placemarkService.createUser(maggie);
+
     await placemarkService.authenticate(maggie);
+
     await placemarkService.deleteAllPlacemarks();
+
     await placemarkService.deleteAllUsers();
     user = await placemarkService.createUser(maggie);
     await placemarkService.authenticate(maggie);
-    placemark.userid = user._id;
   });
 
-  test.only("create placemark", async () => {
+  test("create placemark", async () => {
     const returnedPlacemark =
       await placemarkService.createPlacemark(testPlacemark);
+
     assert.isNotNull(returnedPlacemark);
     assertSubset(testPlacemark, returnedPlacemark);
   });
@@ -39,7 +42,9 @@ suite("Placemark API tests", function () {
       ...testPlacemark,
       userId: user._id,
     });
+
     const response = await placemarkService.deletePlacemark(placemark._id);
+
     assert.equal(response.status, 204);
     try {
       const returnedPlacemark = await placemarkService.getPlacemark(

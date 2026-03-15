@@ -52,7 +52,6 @@ export const placemarkApi = {
   },
 
   create: {
-    auth: false,
     auth: {
       strategy: "jwt",
     },
@@ -108,6 +107,7 @@ export const placemarkApi = {
     handler: async function (request, h) {
       try {
         await db.placemarkStore.deleteAllPlacemarks();
+
         return h.response().code(204);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
