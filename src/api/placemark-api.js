@@ -93,7 +93,7 @@ export const placemarkApi = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: jwt,
     handler: async function (request, h) {
       try {
         await db.placemarkStore.deleteAllPlacemarks();

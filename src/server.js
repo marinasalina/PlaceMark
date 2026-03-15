@@ -12,6 +12,9 @@ import Joi from "joi";
 import Inert from "@hapi/inert";
 import HapiSwagger from "hapi-swagger";
 import { apiRoutes } from "./api-routes.js";
+import jwt from "hapi-auth-jwt2";
+import { validate } from "./api/jwt-utils.js";
+
 import dns from "dns";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -48,7 +51,7 @@ async function init() {
       options: swaggerOptions,
     },
   ]);
-
+  await server.register(jwt);
   server.views({
     engines: {
       hbs: Handlebars,
@@ -61,6 +64,12 @@ async function init() {
     isCached: false,
   });
 
+  server.auth.strategy("jwt", "jwt", {
+    key: process.env.COOKIE_PASSWORD,
+    validate,
+    verifyOptions: { algorithms: ["HS256"] },
+  });
+
   server.auth.strategy("session", "cookie", {
     cookie: {
       name: process.env.COOKIE_NAME,
@@ -70,6 +79,7 @@ async function init() {
     redirectTo: "/",
     validate: accountsController.validate,
   });
+
   server.auth.default("session");
 
   db.init("mongo");

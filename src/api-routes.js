@@ -23,4 +23,9 @@ export const apiRoutes = [
     path: "/api/placemarks/{id}",
     config: placemarkApi.deleteOne,
   },
+  {
+    method: "POST",
+    path: "/api/users/authenticate",
+    config: userApi.authenticate,
+  },
 ];
