@@ -59,6 +59,7 @@ export const placemarkService = {
       `${this.placemarkUrl}/api/users/authenticate`,
       user,
     );
+
     axios.defaults.headers.common["Authorization"] =
       "Bearer " + response.data.token;
     return response.data;

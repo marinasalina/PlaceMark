@@ -2,17 +2,23 @@ import { assert } from "chai";
 import { placemarkService } from "./placemark-service.js";
 import { assertSubset } from "../test-utils.js";
 import { maggie, testUsers } from "../fixtures.js";
+import { db } from "../../src/models/db.js";
 
 const users = new Array(testUsers.length);
 
 suite("User API tests", function () {
   this.timeout(10000);
   setup(async () => {
+    placemarkService.clearAuth();
+    await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
     await placemarkService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
-      // eslint disable next line no-await-in-loop
+      // eslint-disable-next-line no-await-in-loop
       users[i] = await placemarkService.createUser(testUsers[i]);
     }
+    await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
   });
   teardown(async () => {});
 
@@ -21,12 +27,16 @@ suite("User API tests", function () {
     assertSubset(maggie, newUser);
     assert.isDefined(newUser._id);
   });
+
   test("delete all users", async () => {
     let returnedUsers = await placemarkService.getAllUsers();
     assert.equal(returnedUsers.length, 3);
     await placemarkService.deleteAllUsers();
+    await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
+
     returnedUsers = await placemarkService.getAllUsers();
-    assert.equal(returnedUsers.length, 0);
+    assert.equal(returnedUsers.length, 1);
   });
 
   test("get a user", async () => {
@@ -41,12 +51,15 @@ suite("User API tests", function () {
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
-      //assert.equal(error.response.data.statusCode, 404);
+      assert.equal(error.response.data.statusCode, 503);
     }
   });
   // A valid id, but not user, also pass if user has been deleted
   test("get a user - deleted user", async () => {
     await placemarkService.deleteAllUsers();
+    await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
+
     try {
       const returnedUser = await placemarkService.getUser(testUsers[0]._id);
       assert.fail("Should not return a response");
