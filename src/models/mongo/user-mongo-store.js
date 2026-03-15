@@ -38,4 +38,10 @@ export const userMongoStore = {
   async deleteAllUsers() {
     await User.deleteMany({});
   },
+
+  async makeUserAdmin(email) {
+    await User.updateOne({ email: email }, { $set: { isAdmin: true } });
+    console.log("hello", email);
+    return this.getUserByEmail(email);
+  },
 };

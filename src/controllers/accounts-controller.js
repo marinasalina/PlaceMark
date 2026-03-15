@@ -57,8 +57,8 @@ export const accountsController = {
     handler: async function (request, h) {
       request.cookieAuth.clear();
       const { email, password } = request.payload;
-
-      const user = await db.userStore.getUserByEmail(email);
+      let user;
+      user = await db.userStore.getUserByEmail(email);
 
       if (!user || user.password !== password) {
         return h.redirect("/");
@@ -69,7 +69,7 @@ export const accountsController = {
         email === process.env.EMAIL_ADMIN &&
         password === process.env.password
       ) {
-        user.isAdmin = true; // no updateUser() needed
+        user = await db.userStore.makeUserAdmin(user.email);
       }
 
       request.cookieAuth.set({ id: user._id });
