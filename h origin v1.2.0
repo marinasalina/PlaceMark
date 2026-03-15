@@ -1,0 +1,40 @@
+[33mcommit 17f3847a8a3ba54090e839edcaf548e6b0b92af3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;33mtag: [m[1;33mv1.2.0[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Marina19761107 <marinasal1107@gmail.com>
+Date:   Sat Mar 14 22:12:20 2026 +0000
+
+    Level 3
+
+[1mdiff --git a/src/views/partials/admin-menu.hbs b/src/views/partials/admin-menu.hbs[m
+[1mindex ce3142f..cee41e0 100644[m
+[1m--- a/src/views/partials/admin-menu.hbs[m
+[1m+++ b/src/views/partials/admin-menu.hbs[m
+[36m@@ -1,17 +1,16 @@[m
+[31m-<nav class="navbar">[m
+[32m+[m[32m<nav class="navbar is-dark">[m
+   <div class="navbar-brand">[m
+[31m-    {{> brand}}[m
+[32m+[m[32m    <a class="navbar-item" href="/admin">[m
+[32m+[m[32m      <strong>Admin Panel</strong>[m
+[32m+[m[32m    </a>[m
+   </div>[m
+[31m-  <div class="navbar-menu" id="navMenu">[m
+[32m+[m
+[32m+[m[32m  <div class="navbar-menu is-active">[m
+     <div class="navbar-end">[m
+[31m-      <div class="navbar-item">[m
+[31m-        <div class="buttons">[m
+[31m-          <a id="dashboard" class="button" href="/dashboard"> Dashboard </a>[m
+[31m-          <a id="about" class="button" href="/about"> About </a>[m
+[31m-          <a id="logout" class="button" href="/logout"> Logout </a>[m
+[31m-          <a id="category" class="button" href="/category"> Category </a>[m
+[31m-        </div>[m
+[31m-      </div>[m
+[32m+[m[32m      <a class="navbar-item" href="/admin">Dashboard</a>[m
+[32m+[m[32m      <a class="navbar-item" href="/admin/users">Users</a>[m
+[32m+[m[32m      <a class="navbar-item" href="/admin/placemarks">Placemarks</a>[m
+[32m+[m[32m      <a class="navbar-item" href="/logout">Logout</a>[m
+     </div>[m
+   </div>[m
+[31m-</nav>[m
+[32m+[m[32m</nav>[m
+\ No newline at end of file[m

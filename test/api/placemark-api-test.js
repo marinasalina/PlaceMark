@@ -12,7 +12,7 @@ import {
 EventEmitter.setMaxListeners(25);
 
 suite("Placemark API tests", function () {
-  //// Using a regular function so Mocha can apply this.timeout(), which prevents Atlas delays from causing test timeouts. Using a regular function so Mocha can apply this.timeout(), which prevents Atlas delays from causing test timeouts.
+  // Using a regular function so Mocha can apply this.timeout(), which prevents Atlas delays from causing test timeouts. Using a regular function so Mocha can apply this.timeout(), which prevents Atlas delays from causing test timeouts.
   this.timeout(10000);
   let user = null;
   setup(async () => {
