@@ -14,7 +14,7 @@ export const placemarkController = {
         return h.redirect("/dashboard");
       }
       const loggedInUserId = request.auth.credentials._id.toString();
-
+      const reviews = await db.reviewStore.getReviewsByPlacemarkId(placemarkId);
       // Block access to private placemarks
       if (
         placemark.isPrivate &&

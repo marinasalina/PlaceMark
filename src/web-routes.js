@@ -52,4 +52,9 @@ export const webRoutes = [
     handler: { directory: { path: "./public" } },
     options: { auth: false },
   },
+  {
+    method: "POST",
+    path: "/placemark/{id}/addreview",
+    handler: reviewController.addReview,
+  },
 ];
