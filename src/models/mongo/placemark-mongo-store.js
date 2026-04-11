@@ -4,7 +4,7 @@ import { Placemark } from "./placemark.js";
 export const placemarkMongoStore = {
   // Return all placemarks from the database
   async getAllPlacemarks() {
-    return Placemark.find().lean();
+    return Placemark.find({ isPrivate: false }).lean();
   },
   // Find a placemark by its MongoDB ObjectId
   async getPlacemarkById(id) {

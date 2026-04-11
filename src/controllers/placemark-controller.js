@@ -13,6 +13,15 @@ export const placemarkController = {
       if (!placemark) {
         return h.redirect("/dashboard");
       }
+      const loggedInUserId = request.auth.credentials._id.toString();
+
+      // Block access to private placemarks
+      if (
+        placemark.isPrivate &&
+        placemark.userId.toString() !== loggedInUserId
+      ) {
+        return h.redirect("/dashboard");
+      }
 
       const viewData = {
         title: placemark.title,
@@ -33,6 +42,7 @@ export const placemarkController = {
         location: request.payload.location,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
+        isPrivate: request.payload.isPrivate === "on",
       };
       // Save changes to the database
       await db.placemarkStore.updatePlacemark(placemarkId, updatedPlacemark);

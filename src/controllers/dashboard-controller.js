@@ -73,6 +73,7 @@ export const dashboardController = {
         location: request.payload.location,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
+        isPrivate: request.payload.isPrivate === "on",
         userId: loggedInUser._id,
       };
       // Save placemark to database
