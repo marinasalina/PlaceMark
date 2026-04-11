@@ -6,3 +6,45 @@
 <p>{{placemark.location}}</p>
 <p>{{placemark.latitude}}, {{placemark.longitude}}</p>
 
+<hr>
+
+<h2 class="title is-4">Add a Review</h2>
+
+<form action="/placemark/{{placemark._id}}/addreview" method="POST">
+  <div class="field">
+    <label class="label">Your Review</label>
+    <textarea class="textarea" name="text" required></textarea>
+  </div>
+
+  <div class="field">
+    <label class="label">Rating</label>
+    <div class="select">
+      <select name="rating">
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="button is-link">Submit Review</button>
+</form>
+
+<hr>
+
+<h2 class="title is-4">Reviews</h2>
+
+{{#if reviews.length}}
+  {{#each reviews}}
+    <div class="box">
+   <p><strong>{{this.userId.firstName}} {{this.userId.lastName}}</strong></p>
+      <p>Rating: {{this.rating}}/5</p>
+      <p>{{this.text}}</p>
+      <small>{{this.date}}</small>
+    </div>
+  {{/each}}
+{{else}}
+  <p>No reviews yet. Be the first to review this placemark.</p>
+{{/if}}

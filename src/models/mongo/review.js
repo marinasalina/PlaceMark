@@ -3,12 +3,12 @@ import Mongoose from "mongoose";
 const { Schema } = Mongoose;
 
 const reviewSchema = new Schema({
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  placemark: {
+  placemarkId: {
     type: Schema.Types.ObjectId,
     ref: "Placemark",
     required: true,

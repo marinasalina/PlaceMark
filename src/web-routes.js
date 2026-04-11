@@ -5,6 +5,7 @@ import { aboutController } from "./controllers/about-controller.js";
 import { placemarkController } from "./controllers/placemark-controller.js";
 import { categoryController } from "./controllers/category-controller.js";
 import { adminDashboardController } from "./controllers/admin-dashboard-controller.js";
+import { reviewController } from "./controllers/review-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -55,6 +56,6 @@ export const webRoutes = [
   {
     method: "POST",
     path: "/placemark/{id}/addreview",
-    handler: reviewController.addReview,
+    config: reviewController.addReview,
   },
 ];

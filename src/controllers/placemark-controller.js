@@ -26,6 +26,7 @@ export const placemarkController = {
       const viewData = {
         title: placemark.title,
         placemark: placemark,
+        reviews: reviews,
       };
 
       return h.view("placemark-view", viewData);
