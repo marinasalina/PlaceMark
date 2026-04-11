@@ -73,7 +73,7 @@ export const accountsController = {
       // Check if user is admin
       if (
         email === process.env.EMAIL_ADMIN &&
-        password === process.env.password
+        password === process.env.PASSWORD
       ) {
         user = await db.userStore.updateUser(user._id, { isAdmin: true });
       }

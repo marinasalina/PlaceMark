@@ -19,6 +19,7 @@ const placemarkSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  isPrivate: { type: Boolean, default: false },
 });
 // Export the Placemark model for use in the Mongo store
 export const Placemark = Mongoose.model("Placemark", placemarkSchema);

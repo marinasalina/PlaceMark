@@ -9,17 +9,27 @@
     "sourceType": "module"
   },
   "rules": {
+    // Force double quotes instead of single quotes.
     "quotes": ["error", "double"],
+    // Allows imports without .js extension.
     "import/extensions": "off",
+    //Allows named exports even if there’s only one.
     "import/prefer-default-export": "off",
+    //Allows writing
     "object-shorthand": "off",
+    //Disables warnings about unused variables.
     "no-unused-vars": "off",
+    //Allows _id
     "no-underscore-dangle": "off",
+    //Allows modifying function parameters.
     "no-param-reassign": "off",
+    //Disables undefined variable warnings.
     "no-undef": "off",
+    //Allows anonymous functions.
     "func-names": "off",
+    //Allows console.log().
     "no-console": "off",
+    //Prevents warnings about devDependencies.
     "import/no-extraneous-dependencies": "off"
-
   }
 }

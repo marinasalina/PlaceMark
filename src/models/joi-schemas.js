@@ -14,6 +14,7 @@ export const UserCredentialsSpec = Joi.object({
 export const UserSpec = UserCredentialsSpec.keys({
   firstName: Joi.string().example("Homer").required(),
   lastName: Joi.string().example("Simpson").required(),
+  isAdmin: Joi.boolean().default(false),
 }).label("UserDetails");
 // Schema for user objects returned from the database (includes _id and __v)
 export const UserSpecPlus = UserSpec.keys({

@@ -39,4 +39,15 @@ export const userMongoStore = {
   async deleteAllUsers() {
     await User.deleteMany({});
   },
+
+  //update user
+  async updateUser(id, updatedFields) {
+    if (!Mongoose.isValidObjectId(id)) {
+      return null;
+    }
+    const updatedUser = await User.findByIdAndUpdate(id, updatedFields, {
+      new: true,
+    }).lean();
+    return updatedUser;
+  },
 };

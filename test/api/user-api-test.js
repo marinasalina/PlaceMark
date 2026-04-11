@@ -8,26 +8,29 @@ const users = new Array(testUsers.length);
 
 suite("User API tests", function () {
   this.timeout(10000);
+   // Reset and prepare test data before each test
   setup(async () => {
     placemarkService.clearAuth();
     await placemarkService.createUser(maggie);
     await placemarkService.authenticate(maggie);
     await placemarkService.deleteAllUsers();
+    // Create all test users
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       users[i] = await placemarkService.createUser(testUsers[i]);
     }
+     // Recreate and authenticate Maggie for authenticated requests
     await placemarkService.createUser(maggie);
     await placemarkService.authenticate(maggie);
   });
   teardown(async () => {});
-
+   // Test creating a single user
   test("create a user", async () => {
     const newUser = await placemarkService.createUser(maggie);
     assertSubset(maggie, newUser);
     assert.isDefined(newUser._id);
   });
-
+  // Test deleting all users
   test("delete all users", async () => {
     let returnedUsers = await placemarkService.getAllUsers();
     assert.equal(returnedUsers.length, 4);
@@ -39,13 +42,13 @@ suite("User API tests", function () {
     returnedUsers = await placemarkService.getAllUsers();
     assert.equal(returnedUsers.length, 1);
   });
-
+ // Test retrieving a user by ID
   test("get a user", async () => {
     const returnedUser = await placemarkService.getUser(users[0]._id);
     assert.deepEqual(users[0], returnedUser);
   });
 
-  //An invalid Id, or the service not available
+   // Test retrieving a user with an invalid ID
   test("get a user - bad id", async () => {
     try {
       const returnedUser = await placemarkService.getUser("1234");
@@ -55,7 +58,7 @@ suite("User API tests", function () {
       assert.equal(error.response.data.statusCode, 404);
     }
   });
-  // A valid id, but not user, also pass if user has been deleted
+ // Test retrieving a user that has been deleted
   test("get a user - deleted user", async () => {
     await placemarkService.deleteAllUsers();
     await placemarkService.createUser(maggie);
