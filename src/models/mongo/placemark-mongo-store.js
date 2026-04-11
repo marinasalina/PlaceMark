@@ -42,4 +42,7 @@ export const placemarkMongoStore = {
   async deleteAllPlacemarks() {
     await Placemark.deleteMany({});
   },
+  async findByNameAndLocation(title, latitude, longitude) {
+    return Placemark.findOne({ title, latitude, longitude }).lean();
+  },
 };
