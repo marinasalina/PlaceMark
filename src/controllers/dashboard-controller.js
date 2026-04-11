@@ -1,46 +1,42 @@
 import { db } from "../models/db.js";
 import { PlacemarkSpec } from "../models/joi-schemas.js";
-// Controller for the main user dashboard: shows placemarks, categories, and handles CRUD actions
+
 export const dashboardController = {
-  // Display the dashboard for the logged‑in user
+  // Display dashboard for logged‑in user
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      // Redirect if no user is logged in
+
       if (!loggedInUser) {
-        console.log("No logged-in user — redirecting to login");
         return h.redirect("/");
       }
-      // convert objectId to string
+
       loggedInUser._id = loggedInUser._id.toString();
-      // Load all placemarks belonging to this user
+
+      // User still sees only their own placemarks
       const placemarks = await db.placemarkStore.getUserPlacemarks(
         loggedInUser._id,
       );
 
-      // Extract unique categories from the user's placemarks
-      const categories = placemarks.map((p) => p.category);
-      const uniqueCategories = [...new Set(categories)];
+      const categories = [...new Set(placemarks.map((p) => p.category))];
 
-      const viewData = {
+      return h.view("dashboard-view", {
         title: "PlaceMark Dashboard",
         user: loggedInUser,
-        placemarks: placemarks,
-        categories: uniqueCategories,
-      };
-      return h.view("dashboard-view", viewData);
+        placemarks,
+        categories,
+      });
     },
   },
-  // Add a new placemark for the logged‑in user
+
+  // Add a new placemark (PUBLIC POI)
   addPlacemark: {
     validate: {
       payload: PlacemarkSpec,
       options: { abortEarly: false },
 
-      // Validation failure: reload dashboard with errors
       failAction: async function (request, h, error) {
         const loggedInUser = request.auth.credentials;
-
         const placemarks = loggedInUser
           ? await db.placemarkStore.getUserPlacemarks(loggedInUser._id)
           : [];
@@ -49,7 +45,7 @@ export const dashboardController = {
           .view("dashboard-view", {
             title: "Add Placemark Error",
             user: loggedInUser,
-            placemarks: placemarks,
+            placemarks,
             errors: error.details,
           })
           .takeover()
@@ -60,29 +56,47 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
 
-      // Prevent undefined userId
       if (!loggedInUser) {
-        console.log("No logged-in user — cannot save placemark");
         return h.redirect("/");
       }
-      // Build new placemark object
-      const newPlacemark = {
-        title: request.payload.title,
-        description: request.payload.description,
-        category: request.payload.category,
-        location: request.payload.location,
-        latitude: Number(request.payload.latitude),
-        longitude: Number(request.payload.longitude),
-        isPrivate: request.payload.isPrivate === "on",
-        userId: loggedInUser._id,
-      };
-      // Save placemark to database
-      await db.placemarkStore.addPlacemark(loggedInUser._id, newPlacemark);
 
-      return h.redirect("/dashboard");
+      const { title, description, category, location, latitude, longitude } =
+        request.payload;
+
+      // check if placemark already exists
+      const existing = await db.placemarkStore.findByNameAndLocation(
+        title,
+        location,
+      );
+
+      if (existing) {
+        // Add this POI to the user's dashboard list (optional)
+        // Or simply redirect to the existing POI
+        return h.redirect(`/placemark/${existing._id}`);
+      }
+
+      // Create NEW public placemark
+      const newPlacemark = {
+        title,
+        description,
+        category,
+        location,
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+        isPrivate: false,
+        userId: loggedInUser._id, // Owner still stored
+      };
+
+      const placemark = await db.placemarkStore.addPlacemark(
+        loggedInUser._id,
+        newPlacemark,
+      );
+
+      return h.redirect(`/placemark/${placemark._id}`);
     },
   },
-  // Delete a specific placemark by ID
+
+  // Delete a placemark
   deletePlacemark: {
     handler: async function (request, h) {
       const placemarkId = request.params.id;
