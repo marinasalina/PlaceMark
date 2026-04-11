@@ -58,4 +58,19 @@ export const webRoutes = [
     path: "/placemark/{id}/addreview",
     config: reviewController.addReview,
   },
+  {
+    method: "POST",
+    path: "/api/placemarks/{id}/reviews",
+    handler: reviewApi.addReview,
+  },
+  {
+    method: "GET",
+    path: "/api/placemarks/{id}/reviews",
+    handler: reviewApi.getReviews,
+  },
+  {
+    method: "DELETE",
+    path: "/api/reviews",
+    handler: reviewApi.deleteAllReviews,
+  },
 ];

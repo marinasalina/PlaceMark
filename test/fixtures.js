@@ -102,3 +102,13 @@ export const testPlacemarks = [
     img: ["../../public/images/pexels-jonathanborba-33758913.jpg"],
   },
 ];
+
+export const testReview = {
+  text: "Nice place",
+  rating: 5,
+};
+
+export const testReview2 = {
+  text: "Great!",
+  rating: 4,
+};

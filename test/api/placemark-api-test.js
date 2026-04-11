@@ -8,6 +8,8 @@ import {
   testPlacemark,
   testPlacemarks,
 } from "../fixtures.js";
+import { testReview, testReview2 } from "../fixtures.js";
+
 // Increase event listener limit to avoid warnings during tests
 EventEmitter.setMaxListeners(25);
 
@@ -90,5 +92,66 @@ suite("Placemark API tests", function () {
         "Incorrect Response Message",
       );
     }
+  });
+  test("public POI: should reuse existing placemark instead of creating duplicate", async () => {
+    // Create first POI
+    const poi1 = await placemarkService.createPlacemark(testPlacemark);
+
+    // Try to create the same POI again
+    const poi2 = await placemarkService.createPlacemark(testPlacemark);
+
+    // They MUST have the same ID
+    assert.equal(
+      poi1._id,
+      poi2._id,
+      "Duplicate POI was created instead of reusing existing one",
+    );
+  });
+
+  test("shared reviews: all users should see all reviews for the same public POI", async () => {
+    // Create public POI
+    const poi = await placemarkService.createPlacemark(testPlacemark);
+
+    // Add review from user1
+    await placemarkService.addReview(poi._id, {
+      text: "Nice place",
+      rating: 5,
+      userId: user._id,
+    });
+
+    // Create second user
+    const user2 = await placemarkService.createUser(testUsers[1]);
+    await placemarkService.authenticate(testUsers[1]);
+
+    // Add review from user2
+    await placemarkService.addReview(poi._id, {
+      text: "Great!",
+      rating: 4,
+      userId: user2._id,
+    });
+
+    // Fetch all reviews
+    const reviews = await placemarkService.getReviews(poi._id);
+
+    assert.equal(reviews.length, 2, "Reviews are not shared between users");
+    assert.equal(
+      reviews[0].placemarkId,
+      reviews[1].placemarkId,
+      "Reviews belong to different POIs",
+    );
+  });
+  test("placemark view should return POI with all shared reviews", async () => {
+    const poi = await placemarkService.createPlacemark(testPlacemark);
+
+    await placemarkService.addReview(poi._id, testReview);
+    await placemarkService.addReview(poi._id, testReview2);
+
+    const reviews = await placemarkService.getReviews(poi._id);
+
+    assert.equal(
+      reviews.length,
+      2,
+      "Placemark view did not return all reviews",
+    );
   });
 });
