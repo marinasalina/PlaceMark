@@ -5,11 +5,12 @@ import { placemarkJsonStore } from "./json/placemark-json-store.js";
 import { connectMongo } from "./mongo/connect.js";
 import { userMongoStore } from "./mongo/user-mongo-store.js";
 import { placemarkMongoStore } from "./mongo/placemark-mongo-store.js";
+import { reviewMongoStore } from "./review-mongo-store.js";
 
 export const db = {
   userStore: null,
-  // Initialise the data stores based on the chosen storage type (memory, JSON, or MongoDB)
   placemarkStore: null,
+  reviewStore: null,
 
   init(storeType) {
     switch (storeType) {
@@ -23,6 +24,7 @@ export const db = {
         // Use MongoDB storage via Mongoose models
         this.userStore = userMongoStore;
         this.placemarkStore = placemarkMongoStore;
+        this.reviewStore = reviewMongoStore;
 
         connectMongo(); // Establish MongoDB connection
         break;
