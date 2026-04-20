@@ -95,6 +95,7 @@ async function init() {
   // Start the server
   await server.start();
   console.log("Server running on %s", server.info.uri);
+  process.stdin.resume();
 }
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {
