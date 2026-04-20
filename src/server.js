@@ -90,6 +90,7 @@ async function init() {
   // Register all routes
   server.route(webRoutes);
   server.route(apiRoutes);
+
   // Start the server
   await server.start();
   console.log("Server running on %s", server.info.uri);
@@ -99,5 +100,6 @@ process.on("unhandledRejection", (err) => {
   console.log(err);
   process.exit(1);
 });
+
 // Start the application
 init();

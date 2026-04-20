@@ -6,6 +6,7 @@ import { placemarkController } from "./controllers/placemark-controller.js";
 import { categoryController } from "./controllers/category-controller.js";
 import { adminDashboardController } from "./controllers/admin-dashboard-controller.js";
 import { reviewController } from "./controllers/review-controller.js";
+import { reviewApi } from "./api/review-api.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -50,27 +51,12 @@ export const webRoutes = [
   {
     method: "GET",
     path: "/{param*}",
-    handler: { directory: { path: "./public" } },
+    handler: { directory: { path: "public" } },
     options: { auth: false },
   },
   {
     method: "POST",
     path: "/placemark/{id}/addreview",
     config: reviewController.addReview,
-  },
-  {
-    method: "POST",
-    path: "/api/placemarks/{id}/reviews",
-    handler: reviewApi.addReview,
-  },
-  {
-    method: "GET",
-    path: "/api/placemarks/{id}/reviews",
-    handler: reviewApi.getReviews,
-  },
-  {
-    method: "DELETE",
-    path: "/api/reviews",
-    handler: reviewApi.deleteAllReviews,
   },
 ];

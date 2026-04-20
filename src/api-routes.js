@@ -1,5 +1,6 @@
 import { userApi } from "./api/user-api.js";
 import { placemarkApi } from "./api/placemark-api.js";
+import { reviewApi } from "./api/review-api.js";
 // List of all API routes for users and placemarks
 export const apiRoutes = [
   { method: "GET", path: "/api/users", config: userApi.find },
@@ -27,5 +28,20 @@ export const apiRoutes = [
     method: "POST",
     path: "/api/users/authenticate",
     config: userApi.authenticate,
+  },
+  {
+    method: "POST",
+    path: "/api/placemarks/{id}/reviews",
+    config: reviewApi.addReview,
+  },
+  {
+    method: "GET",
+    path: "/api/placemarks/{id}/reviews",
+    config: reviewApi.getReviews,
+  },
+  {
+    method: "DELETE",
+    path: "/api/reviews",
+    config: reviewApi.deleteAllReviews,
   },
 ];
