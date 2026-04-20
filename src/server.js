@@ -38,6 +38,7 @@ async function init() {
   const server = Hapi.server({
     // Use env port or default to 3000
     port: process.env.PORT || 3000,
+    host: "0.0.0.0",
   });
 
   await server.register(Vision); // View rendering
