@@ -99,8 +99,7 @@ async function init() {
 }
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {
-  console.log(err);
-  process.exit(1);
+  console.error("UNHANDLED REJECTION:", err);
 });
 
 // Start the application
