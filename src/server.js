@@ -40,7 +40,7 @@ async function init() {
     port: process.env.PORT || 3000,
     host: "0.0.0.0",
   });
-
+  server.settings.app = { proxy: true };
   await server.register(Vision); // View rendering
   await server.register(Cookie); //Cookie auth
   server.validator(Joi); //Enable Joi validation
