@@ -37,7 +37,7 @@ async function init() {
   // Create Hapi server instance
   const server = Hapi.server({
     // Use env port or default to 3000
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 80,
     host: "0.0.0.0",
   });
   server.settings.app = { proxy: true };
