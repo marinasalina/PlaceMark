@@ -83,7 +83,6 @@ async function init() {
     },
     redirectTo: "/",
     validate: accountsController.validate,
-    trustProxy: true,
   });
   // Set default authentication method
   server.auth.default("session");
