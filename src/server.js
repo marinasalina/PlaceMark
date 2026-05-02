@@ -40,6 +40,14 @@ async function init() {
     port: process.env.PORT || 3000,
     host: "0.0.0.0",
   });
+  // Log every incoming request
+  server.ext("onRequest", (request, h) => {
+    console.log(
+      `Request: ${request.method.toUpperCase()} ${request.path} from ${request.info.remoteAddress}`,
+    );
+    return h.continue;
+  });
+
   server.settings.app = { proxy: true };
   await server.register(Vision); // View rendering
   await server.register(Cookie); //Cookie auth
