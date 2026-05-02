@@ -7,6 +7,7 @@ import { categoryController } from "./controllers/category-controller.js";
 import { adminDashboardController } from "./controllers/admin-dashboard-controller.js";
 import { reviewController } from "./controllers/review-controller.js";
 import { reviewApi } from "./api/review-api.js";
+import os from "os";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -58,5 +59,13 @@ export const webRoutes = [
     method: "POST",
     path: "/placemark/{id}/addreview",
     config: reviewController.addReview,
+  },
+  {
+    method: "GET",
+    path: "/testlb",
+    handler: function (request, h) {
+      return "Server: " + os.hostname();
+    },
+    config: { auth: false },
   },
 ];
